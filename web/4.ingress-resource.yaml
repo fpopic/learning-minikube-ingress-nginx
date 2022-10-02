@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-ingress
+  namespace: web
+spec:
+  defaultBackend:
+    service:
+      name: web-service
+      port:
+        number: 30123
+  ingressClassName: nginx
+  rules:
+    - host: my-web.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web-service
+                port:
+                  number: 30123
